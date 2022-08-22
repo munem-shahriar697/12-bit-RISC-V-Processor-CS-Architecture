@@ -119,3 +119,5 @@ for x in b:
     h.write(hex_num2)
     h.write(hex_num3)
     h.write("\n")
+b.close()
+h.close()
