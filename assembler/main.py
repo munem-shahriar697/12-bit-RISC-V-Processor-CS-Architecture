@@ -1,3 +1,4 @@
+#register recognition for R-type
 def r_type(string):
     if string == "$s0," or string == "$s0":
         return bin(0)[2:].zfill(3)
@@ -15,6 +16,7 @@ def r_type(string):
         return bin(6)[2:].zfill(3)
     elif string == "$s7," or string == "$s7":
         return bin(7)[2:].zfill(3)
+#register recognition for I-type
 def i_type(string):
     if string == "$s0," or string == "$s0" or string == "0":
         return bin(0)[2:].zfill(3)
@@ -33,6 +35,7 @@ def i_type(string):
     elif string == "$s7," or string == "$s7" or string == "7":
         return bin(7)[2:].zfill(3)
 
+#register recognition for load-store-type
 def lw_sw(string):
     if string == "$s0," or string == "$s0":
         return bin(0)[2:].zfill(3)
@@ -54,9 +57,9 @@ def lw_sw(string):
 f = open("assembly_code.txt", "r")
 r = open("output_bin.txt", "w")
 for x in f:
-    my_string = ""
+    my_string = "" #taking a new string to store binary output
     s = x
-    result = s.split()
+    result = s.split() #here the assembly gets splitted into pieces by black spaces
     if result[0] == "add":
         my_string += bin(0)[2:].zfill(3)
         my_string += r_type(result[1])
@@ -106,11 +109,14 @@ for x in f:
     r.write(my_string + "\n")
 r.close()
 f.close()
+#files closed after making the binary file
 
+#opening file for generating hex codes from the binary output file
 b = open("output_bin.txt", "r")
 h = open("output_hex.txt", "w")
-h.write("v2.0 raw\n")
+h.write("v2.0 raw\n")#this is a line used for logisim to recognise the hex file
 for x in b:
+    #here i'm slicing the 12 bit binary output lines into slice of 4 bits so that I can convert it to hexadecimal
     hex_num1 = format(int(x[0:4],2),'x')
     hex_num2 = format(int(x[4:8],2),'x')
     hex_num3 = format(int(x[8:12],2),'x')
@@ -120,3 +126,4 @@ for x in b:
     h.write("\n")
 b.close()
 h.close()
+#files closed for generating hex codes
