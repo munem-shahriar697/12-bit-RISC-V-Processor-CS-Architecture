@@ -109,9 +109,8 @@ f.close()
 
 b = open("output_bin.txt", "r")
 h = open("output_hex.txt", "w")
-counter = 0
+h.write("v2.0 raw\n")
 for x in b:
-    # x = b.readline().strip()
     hex_num1 = format(int(x[0:4],2),'x')
     hex_num2 = format(int(x[4:8],2),'x')
     hex_num3 = format(int(x[8:12],2),'x')
